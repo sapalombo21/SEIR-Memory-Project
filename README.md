@@ -5,7 +5,7 @@
 3. Cool effects when winning so that players actually want to win. maybe randomize the effects.
 4. Nice looking background. Should have more time to stylize since the game it self is not complicated.
 ### Wireframe
-![image](https://drive.google.com/file/d/1aYfrRYBiHVbr7pTVDH9Ocx6ElW1K2zGm/preview)
+![image](https://github.com/sapalombo21/SEIR-Memory-Project/blob/main/wireframe.png)
 ### Pseudocode
 Initiliaze properties such as urls to images, number of card pairs, the grid, number of moves, number of matches, max move count.
 Function to preload images depending on number of pairs.
