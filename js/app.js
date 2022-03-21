@@ -27,12 +27,17 @@ function open(card) {
   card.open = true;
   moves++;
   card.cardImage.src = card.image; // "flips" the card
+  card.cardImage.classList.add('open');
   if (mem === null) {
     mem = card;
   } // checks if this is the first card picked
   else {
+    card.cardImage.classList.remove('open');
+    mem.cardImage.classList.remove('open');
     if (card.value === mem.value) {
       // checks if they are matching cards
+      card.cardImage.classList.add('right');
+      mem.cardImage.classList.add('right');
       matched++;
       mem = null; // resets the memory
       if (matched === sets) {
@@ -41,11 +46,15 @@ function open(card) {
     } else if (moves >= maxMoves) {
       alert("You lose! Exceeded " + maxMoves + " moves.");
     } else {
+      card.cardImage.classList.add('wrong');
+      mem.cardImage.classList.add('wrong');
       lock = setTimeout(() => {
         card.open = false;
         mem.open = false;
         card.cardImage.src = backOfCard;
         mem.cardImage.src = backOfCard;
+        card.cardImage.classList.remove('wrong');
+        mem.cardImage.classList.remove('wrong');
         mem = null;
         lock = null;
       }, showTime);
