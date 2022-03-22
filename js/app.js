@@ -24,6 +24,7 @@ class Card {
   }
 }
 
+// the most important function. Flips the card and checks the matching conditions and win/lose con.
 function open(card) {
   if (lock === null) {
     // disables clicking during the timout. according to my dad this is a semaphore, used in asynchronous code all the time.
