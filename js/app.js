@@ -19,45 +19,51 @@ class Card {
     this.cardImage = document.createElement("img");
     this.cardImage.className = "mem-card";
     this.cardImage.src = backOfCard;
-    this.cardImage.addEventListener("click", () => open(this));
+    this.cardImage.addEventListener("click", () => open(this)); // arrow function is necessary due to "this" scope
   }
 }
 
 function open(card) {
-  card.open = true;
-  moves++;
-  card.cardImage.src = card.image; // "flips" the card
-  card.cardImage.classList.add('open');
-  if (mem === null) {
-    mem = card;
-  } // checks if this is the first card picked
-  else {
-    card.cardImage.classList.remove('open');
-    mem.cardImage.classList.remove('open');
-    if (card.value === mem.value) {
-      // checks if they are matching cards
-      card.cardImage.classList.add('right');
-      mem.cardImage.classList.add('right');
-      matched++;
-      mem = null; // resets the memory
-      if (matched === sets) {
-        alert("You win! Total moves " + moves);
+  if (lock === null) { // disables clicking during the timout
+    if (!card.open) { // disables clicking on already open card
+      moves++;
+      card.open = true;
+      card.cardImage.src = card.image; // "flips" the card
+      card.cardImage.classList.add("open");
+      if (mem === null) {
+        mem = card;
+      } // checks if this is the first card picked
+      else {
+        card.cardImage.classList.remove("open");
+        mem.cardImage.classList.remove("open");
+        if (card.value === mem.value) {
+          // checks if they are matching cards
+          card.cardImage.classList.add("right");
+          mem.cardImage.classList.add("right");
+          matched++;
+          mem = null; // resets the memory
+          if (matched === sets) {
+            alert("You win! Total moves " + moves);
+            init();
+          }
+        } else if (moves >= maxMoves) {
+          alert("You lose! Exceeded " + maxMoves + " moves.");
+          init();
+        } else {
+          card.cardImage.classList.add("wrong");
+          mem.cardImage.classList.add("wrong");
+          lock = setTimeout(() => {
+            card.open = false;
+            mem.open = false;
+            card.cardImage.src = backOfCard;
+            mem.cardImage.src = backOfCard;
+            card.cardImage.classList.remove("wrong");
+            mem.cardImage.classList.remove("wrong");
+            mem = null;
+            lock = null;
+          }, showTime);
+        }
       }
-    } else if (moves >= maxMoves) {
-      alert("You lose! Exceeded " + maxMoves + " moves.");
-    } else {
-      card.cardImage.classList.add('wrong');
-      mem.cardImage.classList.add('wrong');
-      lock = setTimeout(() => {
-        card.open = false;
-        mem.open = false;
-        card.cardImage.src = backOfCard;
-        mem.cardImage.src = backOfCard;
-        card.cardImage.classList.remove('wrong');
-        mem.cardImage.classList.remove('wrong');
-        mem = null;
-        lock = null;
-      }, showTime);
     }
   }
 }
@@ -79,8 +85,14 @@ function shuffle(array) {
   }
   return array;
 }
-
+// clears the div when the game is reset
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 function init() {
+  removeAllChildNodes(cardGrid);
   sets = 2;
   matched = 0;
   grid = [];
