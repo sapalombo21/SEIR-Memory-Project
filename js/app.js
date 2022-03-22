@@ -99,11 +99,11 @@ function removeAllChildNodes(parent) {
 }
 function init() {
   removeAllChildNodes(cardGrid);
-  sets = 2;
+  sets = 4;
   matched = 0;
   grid = [];
   moves = 0;
-  maxMoves = 10;
+  maxMoves = 20;
   mem = null;
   lock = null;
   header.innerText = 'Moves left: ' + maxMoves;
@@ -111,7 +111,11 @@ function init() {
   const cardTwo = new Card((src = "images/image-gear.png"), "gear");
   const cardThree = new Card((src = "images/image-arc.png"), "arc");
   const cardFour = new Card((src = "images/image-arc.png"), "arc");
-  grid.push(cardOne, cardTwo, cardThree, cardFour);
+  const cardFive = new Card((src='images/image-power.png'), 'power');
+  const cardSix = new Card((src='images/image-power.png'), 'power');
+  const cardSeven = new Card((src='images/image-ranger.png'), 'ranger');
+  const cardEight = new Card((src='images/image-ranger.png'), 'ranger');
+  grid.push(cardOne, cardTwo, cardThree, cardFour, cardFive,cardSix,cardSeven,cardEight);
   shuffle(grid);
   grid.forEach((item) => {
     cardGrid.appendChild(item.cardImage);
