@@ -9,6 +9,7 @@ let lock; // locks controls during timeout
 const showTime = 1000; // time in MS to keep the cards open
 const cardGrid = document.querySelector("#mem-game");
 const backOfCard = (src = "images/image-back.png");
+const header = document.querySelector('h2');
 
 class Card {
   // card objects that are initialized with an image url and value;
@@ -24,12 +25,19 @@ class Card {
 }
 
 function open(card) {
-  if (lock === null) { // disables clicking during the timout
-    if (!card.open) { // disables clicking on already open card
+  if (lock === null) {
+    // disables clicking during the timout. according to my dad this is a semaphore, used in asynchronous code all the time.
+    if (!card.open) {
+      // disables clicking on already open card
       moves++;
+      header.innerText= 'Moves left: ' + (maxMoves - moves);
       card.open = true;
       card.cardImage.src = card.image; // "flips" the card
       card.cardImage.classList.add("open");
+      if (moves >= maxMoves) {
+        alert("You lose! Reached " + maxMoves + " moves.");
+        init();
+      }
       if (mem === null) {
         mem = card;
       } // checks if this is the first card picked
@@ -46,10 +54,8 @@ function open(card) {
             alert("You win! Total moves " + moves);
             init();
           }
-        } else if (moves >= maxMoves) {
-          alert("You lose! Exceeded " + maxMoves + " moves.");
-          init();
-        } else {
+        } 
+        else {
           card.cardImage.classList.add("wrong");
           mem.cardImage.classList.add("wrong");
           lock = setTimeout(() => {
@@ -87,9 +93,9 @@ function shuffle(array) {
 }
 // clears the div when the game is reset
 function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }
 function init() {
   removeAllChildNodes(cardGrid);
@@ -100,6 +106,7 @@ function init() {
   maxMoves = 10;
   mem = null;
   lock = null;
+  header.innerText = 'Moves left: ' + maxMoves;
   const cardOne = new Card((src = "images/image-gear.png"), "gear");
   const cardTwo = new Card((src = "images/image-gear.png"), "gear");
   const cardThree = new Card((src = "images/image-arc.png"), "arc");

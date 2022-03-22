@@ -5,12 +5,15 @@
     max-width: 420px;
     margin: 0 auto;
 }
+h2 {
+    text-align: center;
+}
 
 .mem-card {
     padding: 10px;
     cursor: pointer;
-    background: #e5e5e5;
+    background: #dddddd;
   }
-.mem-card.open { background: #fea; }
-.mem-card.right { background: #b3ffc0; }
-.mem-card.wrong { background: #ffb6b6; }
+.mem-card.open { background: rgb(255, 216, 58); }
+.mem-card.right { background: #05cf27; }
+.mem-card.wrong { background: #f03e3e; }
