@@ -42,7 +42,7 @@ function open(card) {
     // disables clicking during the timout. according to my dad this is a semaphore, used in asynchronous code all the time.
     if (!card.open) {
       // disables clicking on already open card
-      card.interact();
+      card.interact(); // clicking noise.
       moves++;
       header.innerText = "Moves left: " + (maxMoves - moves);
       card.open = true;
@@ -61,14 +61,9 @@ function open(card) {
           matched++;
           card.right();
           mem = null; // resets the memory
-          if (matched === sets) {
-            alert("You win! Total moves " + moves);
-            init();
-          }
-        } else if (moves >= maxMoves) {
-          alert("You lose! Reached " + maxMoves + " moves.");
-          init();
+          checkEnd();
         } else {
+          checkEnd();
           mem.wrong();
           card.cardImage.classList.add("wrong");
           mem.cardImage.classList.add("wrong");
@@ -110,6 +105,16 @@ function shuffle(array) {
 function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
+  }
+}
+// checks win/lose condition so i don't have to repeat myself.
+function checkEnd() {
+  if (matched === sets) {
+    alert("You win! Total moves " + moves);
+    init();
+  } else if (moves >= maxMoves) {
+    alert("You lose! Reached " + maxMoves + " moves.");
+    init();
   }
 }
 function init() {
