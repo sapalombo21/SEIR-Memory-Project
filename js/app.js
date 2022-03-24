@@ -10,7 +10,10 @@ const showTime = 1000; // time in MS to keep the cards open
 const cardGrid = document.querySelector("#mem-game");
 const backOfCard = (src = "images/image-back.png");
 const header = document.querySelector("h2");
-
+const startScreen = document.querySelector('#start');
+const counter = document.querySelector('#counter');
+const endScreen = document.querySelector('#gameover')
+const endText = document.querySelector('#endtext')
 class Card {
   // card objects that are initialized with an image url and value;
   constructor(image, value, winSound, loseSound) {
@@ -110,15 +113,30 @@ function removeAllChildNodes(parent) {
 // checks win/lose condition so i don't have to repeat myself.
 function checkEnd() {
   if (matched === sets) {
-    alert("You win! Total moves " + moves);
-    init();
+    gameOver(true);
   } else if (moves >= maxMoves) {
-    alert("You lose! Reached " + maxMoves + " moves.");
-    init();
+    gameOver(false);
+  }
+}
+function gameOver(win) {
+  if(win){
+    cardGrid.style.display = 'none';
+    counter.style.display = 'none';
+    endScreen.style.display = 'block';
+    endText.innerText = 'You win! Total moves ' + moves;
+  } else {
+    cardGrid.style.display = 'none';
+    counter.style.display = 'none';
+    endScreen.style.display = 'block';
+    endText.innerText = 'You lose! Reached ' + maxMoves + ' moves.';
   }
 }
 function init() {
   removeAllChildNodes(cardGrid);
+  startScreen.style.display = 'none';
+  counter.style.display = 'block';
+  cardGrid.style.display = 'grid';
+  endScreen.style.display = 'none';
   sets = 6;
   matched = 0;
   grid = [];
@@ -220,4 +238,4 @@ function init() {
   });
 }
 
-init();
+

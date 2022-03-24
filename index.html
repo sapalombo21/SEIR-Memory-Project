@@ -12,9 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <h2>Moves left: </h2>
-    <div id="mem-game">
-
+    <h2 id="counter" style="display:none;">Moves left: </h2>
+    <div id="mem-game" style="display:none;"></div>
+    <div id="start" style="display:block">
+        <a href="#" onclick="init()">Start Game</a>
+    </div>
+    <div id="gameover" style="display:none">
+        <h2 id="endtext"></h2>
+        <a href="#" onclick="init()">Restart</a>
     </div>
 </body>
 </html>
