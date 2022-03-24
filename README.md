@@ -1,6 +1,6 @@
 # SEIR-Memory-Project
-## LINK TO GAME
-![game](https://sapalombo21.github.io/SEIR-Memory-Project/)
+## [LINK TO GAME](https://sapalombo21.github.io/SEIR-Memory-Project/)
+
 ### Goals of the Projecct
 1. Memory game with a loss condition, that being a maximum move count. Difficulty settings to change max move count.
 2. Feedback through sound effects and animations.
