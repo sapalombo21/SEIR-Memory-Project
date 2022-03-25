@@ -12,3 +12,9 @@
 This game will use an array of an object called Card. Card will contain various properties such as the image, the value, and might also include the click handler built in. At first, the gameboard will be hardcoded with one size in mind, and then shuffled using an array shuffling algorithm. Memory variable in the global scope to track which cards have been clicked on. Matched pairs variable to track the game state. The click event will check if there is a card in memory first, then check if the card in memory has the same image as the card that was just clicked on. If they are the same value, they will stay flipped and the amount of matched cards increased by one. Every click will increase the move count. Win condition when the # of matched pairs is equal to the amount of sets. Lose condition when max move count is reached.
 #### STATE
 The number of matched pairs will need to be tracked through out the game.
+### Technologies used:
+JS, CSS, HTML
+### Future revisions:
+1. Scoreboard that shows who has the lowest move count and time.
+2. Animations for flipping cards, setting the board etc. Would have to use canvas and JQuery.
+3. Difficulties to change the size of the board.
